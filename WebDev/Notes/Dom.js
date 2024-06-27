@@ -379,7 +379,9 @@ It executes : 1. one line at a time
    When the operation is completed, the callback function is added to the Task Queue
    When the Call Stack is empty, the callback function is executed from the Task Queue
 
-2. There is a new RUN TIME ENVIRONMENT : fetch : It helps priorotise task inside task queue
+2. There is a new RUN TIME ENVIRONMENT : (fetch) : It helps priorotise tasks, known as (micro-task queue / priority queue/fetch queue)
+    -> If there are lots of calls then the calls made using 'fetch' will be priorotise -: It has separate queue than normal 'task queue'. 
+        ->It is executed before the normal task queue. It's a VIP queue
 
 3. If there are lots of Sync and Async functions then always Sync func executes first no matter what (even though Async function have timeout = 0;)
 */
@@ -442,7 +444,7 @@ let myPromise = new Promise((resolve, reject) => {
   }, 2000); // Wait for 2 seconds
 });
 
-// Consume: Always pass 'function'/'arraow function' to "then" & "catch"
+// Consume: Always pass 'function'/'arraow function' to "then" & "catch" & "finally"
 myPromise.then(()=>{ 
     console.log("Task Resolved");
 }).catch(()=>{
@@ -478,4 +480,146 @@ promiseThree.then((user)=>{
     console.log(`Hello ${userName}`);
 }).catch(()=>{
     console.log("Error Occured");
+}).finally(()=>{ // finally : It's used to show whether promise executed or not. It will always run irrespective of 'Resolve' or 'Reject'
+    console.log("Finally Either Resolved or Rejected");
 })
+
+// USE async / await with Promises: (Alternate of then, catch, finally)
+const promiseFour = new Promise((resolve, reject) =>{
+    setTimeout(() =>{
+        let everyThingOK = true;
+        if(everyThingOK){
+            resolve("Task Completed", {name: "Manjit", email: "manjit123@gmail.com"});
+        }
+        else reject("Error Occured");
+    }, 2000);
+});
+
+async function consumePromiseFour() { // ALWAYS USE TRY-> CATCH whenever using async/await 
+    try {
+        let result = await promiseFour;
+        console.log(result);
+    }
+    catch (error) {
+        console.log(error);
+    }
+}
+
+consumePromiseFour(); // CALL 
+
+
+// EXAMPLE on Fetching using (async-await) & (then-cach-finally):
+// USING ASYNCH/AWAIT::
+async function fetchUser(){
+    try{
+        const userData = await fetch("https://jsonplaceholder.typicode.com/posts?exact=true");
+        const user = await userData.json(); // Converts all the data into 'json' data. So takes time
+        console.log(user);
+    }
+    catch(error){
+        console.log("Error Occured");
+    }
+}
+fetchUser();
+
+// USING THEN/CATCH/FINALLY::
+const data = fetch("https://jsonplaceholder.typicode.com/posts?exact=true");
+data.then((response)=>{
+    console.log("Data Fetched");
+    return response.json(); //<pending>
+}).then((jsonData)=>{
+    console.log("Data Converted"); //fulfilled>
+    console.log(jsonData);
+}).catch((error) =>{
+    console.log(error); //<rejected>
+}).finally(()=>{
+    console.log("Finally Either Resolved or Rejected");
+});
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Fetch   L:41
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+Fetch is a function in JavaScript that helps you get data from other places on the internet.
+It's like sending a friend to fetch (get/deliver) something for you.
+
+NOTE:** An accurate check for a successful fetch() would include checking that the promise -> RESOLVED. example-: "success", "error 404", all other error codes**
+     ** If there is any <NETWORK ERROR> then only the promise -> REJECTED**
+
+:: It helps priorotise tasks, [14:00 min   L:41]
+    -> If there are lots of calls then the calls made using 'fetch' will be priorotise -: It has separate queue than normal 'task queue', known as (micro-task queue / priority queue/fetch queue)
+        ->It is executed before the normal task queue if both have same time to execute(like both are expected to be in 3sec). It's a VIP queue.
+        -> It helps to avoid 'callback hell'.
+        -> It helps to avoid 'race condition'.
+        -> If normal task queue is expected to happen at 3 sec and fetch-queue task is expected at 4 sec. 
+            -> Then obiously 'normal-task-queue' call back will execute before 'fetch-queue'.
+
+:: Special Working of Fetch [15:00 min]
+
+*/
+// EXAMPLES::
+fetch('https://api.example.com/data') // This is the URL we're fetching data from.
+  .then(response => {
+    // The 'response' is what the server sends back.
+    // We need to convert this response into a format we can use.
+    // Usually, the data is in JSON format (JavaScript Object Notation).
+    return response.json(); // This converts the response into a JavaScript object.
+  })
+  .then(data => {
+    // Now we have the data from the server, and we can do something with it.
+    console.log(data); // Here, we're just logging the data to the console.
+  })
+  .catch(error => {
+    // If there's an error (like if the server is down or the URL is wrong), this block runs.
+    console.error('Error:', error); // We print the error message to the console.
+  }).finally(()=>{
+    console.log("Fetched");
+  });
+
+// Why use fetch?
+// - Fetch helps you get or send data ((without needing to reload your webpage)).
+// - It makes your web pages more interactive and able to show up-to-date information.
+
+// Real-world example:
+// Using fetch to get current weather data from a weather API.
+
+fetch('https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m')
+.then(response => {
+  return response.json()}) // Convert the response to JSON.
+.then(weatherData => {
+  console.log('Current temperature:', weatherData.current_units); 
+  return weatherData.current_units;
+}).then(units => {
+  const temp = units.temperature_2m;
+  console.log('Current temperature:', temp);
+})
+.catch(error => {
+  console.error('Could not get the weather:', error); // Print any errors that happen.
+});
+
+// Fetch with Options:
+// Sometimes, you need to send more complex requests with additional options like headers, body or method type (GET, POST, etc.).
+
+// Example of fetch with options:
+fetch('https://api.example.com/data', {
+  method: 'POST', // We're sending data using the POST method.
+  headers: {
+    'Content-Type': 'application/json' // Tells the server we're sending JSON data.
+  },
+  body: JSON.stringify({ // The actual data we're sending to the server.
+    name: 'John Doe',
+    age: 25
+  })
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Server response:', data); // Print the response from the server.
+})
+.catch(error => {
+  console.error('Error:', error); // Print any errors that happen.
+});
+
+// Summary:
+// - Use fetch to get or send data over the internet without reloading the page.
+// - Fetch can handle both simple and complex requests.
+// - It's a powerful tool to make your websites more dynamic and responsive to real-time data.  
