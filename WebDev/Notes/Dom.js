@@ -143,11 +143,11 @@ allDivs.forEach(function(div) {
     <div className="day">Friday</div>
     <div className="day">Saturday</div>
 </div>
-const parentX = document.querySelector('week'); // consider 'week' as parent
-console.log(parentX);
+const ancestorX = document.querySelector('week'); // consider 'week' as ancestor
+console.log(ancestorX);
 
-// Go from PARENT -> CHILD
-const children = parentX.children; // Return HTML COLLECTION: 'days' of week => As children of 'week'
+// Go from ancestor -> CHILD
+const children = ancestorX.children; // Return HTML COLLECTION: 'days' of week => As children of 'week'
 
 console.log(children[0].innerHTML) // "Sunday"
 for(let i = 0; i < children.length; i++){
@@ -155,20 +155,20 @@ for(let i = 0; i < children.length; i++){
     children[i].style.color = 'orange';
 }
 
-// firstElementChild : Retrives first element of the parent
-// lastElementChild : Retrives last element of the parent
-console.log(parentX.firstElementChild); 
-console.log(parentX.lastElementChild);
+// firstElementChild : Retrives first element of the ancestor
+// lastElementChild : Retrives last element of the ancestor
+console.log(ancestorX.firstElementChild); 
+console.log(ancestorX.lastElementChild);
 
-// Go from CHILD -> PARENT
+// Go from CHILD -> ancestor
 const firstDay = document.querySelector('.day') // Sunday
-const parentOfDays = firstDay.parentElement; // week
+const ancestorOfDays = firstDay.ancestorElement; // week
 
 // Sibling
 const secondDay = firstDay.nextElementSibling; // Monday
 
 // ChildNodes : 16:00 in L33 
-console.log(parentX.childNodes); // Return number of nodes in the parentX tree
+console.log(ancestorX.childNodes); // Return number of nodes in the ancestorX tree
 
 //---------------------------------------------------------------------------------------------------------------------------------
 //CREATE ELEMENT Using DOM   L:33
@@ -202,8 +202,8 @@ document.body.appendChild(newElemet); // append div to body
 function addLanguage(langName){
     const newLi = document.createElement('li');
     newLi.innerHTML = langName;
-    const parentUl = document.querySelector('.language');
-    parentUl.appendChild(newLi);
+    const ancestorUl = document.querySelector('.language');
+    ancestorUl.appendChild(newLi);
 }
 addLanguage("python");
 
@@ -211,8 +211,8 @@ addLanguage("python");
 function addLanguageOptimal(langName){
     const newLi = document.createElement('li');
     newLi.append(document.createTextNode(langName));
-    const parentUl = document.querySelector('.language');
-    parentUl.appendChild(newLi);
+    const ancestorUl = document.querySelector('.language');
+    ancestorUl.appendChild(newLi);
 }
 addLanguageOptimal("React");
 
@@ -266,23 +266,23 @@ button.addEventListener("click", function(){ //Here 'click' is the event upon wh
     2. Bubbling Phase (false) : From bottom to top 
 
     eg:
-    <div id="grandparent">
-        <div id="parent">
+    <div id="grandancestor">
+        <div id="ancestor">
             <button id="child">Click Me</button>
         </div>
     </div>
     
-    const div1 = document.querySelector("#grandparent");
-    const div2 = document.querySelector("#parent");
+    const div1 = document.querySelector("#grandancestor");
+    const div2 = document.querySelector("#ancestor");
     const div3 = document.querySelector("#child");
 
     BUBBLING PHASE: 
     div1.addEventListener("click", function(){
-        console.log("grandparent");
+        console.log("grandancestor");
     })
 
     div2.addEventListener("click", function(){
-        console.log("parent");
+        console.log("ancestor");
     })
 
     div3.addEventListener("click", function(){
@@ -290,25 +290,25 @@ button.addEventListener("click", function(){ //Here 'click' is the event upon wh
     })
 
     On clicking on child, it will print(Bottom to Top) :     childern
-                                                                parent
-                                                                grandparent
+                                                                ancestor
+                                                                grandancestor
 
      
     CAPTURING PHASE:
     div1.addEventListener("click", function(){
-        console.log("grandparent");
+        console.log("grandancestor");
     }, true)
 
     div2.addEventListener("click", function(){
-        console.log("parent");
+        console.log("ancestor");
     }, true)
 
     div3.addEventListener("click", function(){
         console.log("children");
     }, true)
 
-    On clicking on child, it will print(Top to Bottom) :     grandparent
-                                                             parent 
+    On clicking on child, it will print(Top to Bottom) :     grandancestor
+                                                             ancestor 
                                                              childern
 
     
@@ -349,7 +349,7 @@ button.addEventListener("click", function(event){
     const img = document.querySelector("img"); // access that image
 
     img.remove(); // remove directly
-    img.parentNode.removeChild(img); // remove that image by going to its parent
+    img.ancestorNode.removeChild(img); // remove that image by going to its ancestor
 
 */
 
@@ -623,3 +623,347 @@ fetch('https://api.example.com/data', {
 // - Use fetch to get or send data over the internet without reloading the page.
 // - Fetch can handle both simple and complex requests.
 // - It's a powerful tool to make your websites more dynamic and responsive to real-time data.  
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// OOPs   L:42
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+Object-Oriented Programming (OOP) is a way of organizing and structuring your code to make it easier to understand and work with.
+In OOP, we use objects to represent things in the real world or in our application.
+*/
+// ------------------------
+// 1. CLASSES AND OBJECTS:
+// ------------------------
+/*
+   - A class is like a blueprint for creating objects.
+   - An object is an instance of a class, like a building created from a blueprint.
+*/
+
+class Car {
+    /*
+    This is the constructor method. It gets called when we create a new Car object.
+    'new' keyword ~~ It creates a new instance of the object.
+    */
+    constructor(make, model, year) {
+      this.make = make; // 'this.make' refers to the 'make' property of the Car object.
+      this.model = model; // 'this.model' refers to the 'model' property of the Car object.
+      this.year = year; // 'this.year' refers to the 'year' property of the Car object.
+    }
+  
+    // Method to display car details
+    displayDetails() {
+      console.log(`Car: ${this.make} ${this.model}, Year: ${this.year}`);
+    }
+  }
+  
+  // Creating a new object of the Car class
+  let myCar = new Car('Toyota', 'Corolla', 2020);
+  myCar.displayDetails(); // This will print: Car: Toyota Corolla, Year: 2020
+  
+  // Explanation:
+  /*
+  - We defined a Car class with properties like 'make', 'model', and 'year'.
+  - The 'constructor' method initializes these properties when a new Car object is created.
+  - The 'displayDetails' method prints the details of the car.
+  */
+
+  // ------------------------
+  // 2. INHERITANCE:
+  // ------------------------
+  /*
+     - Inheritance allows one class to inherit properties and methods from another class.
+     - It's like a child class taking on characteristics of a ancestor class.
+  */
+  class ElectricCar extends Car {
+    constructor(make, model, year, batteryLife) {
+      super(make, model, year); // 'super' calls the constructor of the ancestor class (Car).
+      this.batteryLife = batteryLife; // Adding a new property specific to ElectricCar.
+    }
+  
+    // Method to display battery life
+    displayBatteryLife() {
+      console.log(`Battery life: ${this.batteryLife} hours`);
+    }
+  }
+  
+  // Creating a new object of the ElectricCar class
+  let myElectricCar = new ElectricCar('Tesla', 'Model S', 2021, 24);
+  myElectricCar.displayDetails(); // This will print: Car: Tesla Model S, Year: 2021
+  myElectricCar.displayBatteryLife(); // This will print: Battery life: 24 hours
+  
+ 
+ // Explanation:
+  /*
+  - We created a new class called ElectricCar that extends the Car class.
+  - ElectricCar inherits the properties and methods of Car but also has its own property, 'batteryLife', and its own method, 'displayBatteryLife'.
+  */
+
+  // ------------------------
+  // 3. ENCAPSULATION:
+  // ------------------------
+  /*
+     - Encapsulation means keeping the details (like data) inside an object hidden from the outside world.
+     - We use methods to access or update the data instead of changing it directly.
+  */
+  class Phone {
+    constructor(brand, model) {
+      this._brand = brand; // The underscore (_) suggests this property is private and should not be accessed directly.
+      this._model = model;
+    }
+  
+    // Method to get the phone's brand
+    getBrand() {
+      return this._brand;
+    }
+  
+    // Method to set the phone's brand
+    setBrand(newBrand) {
+      this._brand = newBrand;
+    }
+  
+    // Method to display phone details
+    displayDetails() {
+      console.log(`Phone: ${this._brand} ${this._model}`);
+    }
+  }
+  
+  // Creating a new object of the Phone class
+  let myPhone = new Phone('Apple', 'iPhone 12');
+  myPhone.displayDetails(); // This will print: Phone: Apple iPhone 12
+  
+  // Changing the brand using the method
+  myPhone.setBrand('Samsung');
+  myPhone.displayDetails(); // This will print: Phone: Samsung iPhone 12
+  
+  // Explanation:
+  /*
+  - We use the 'getBrand' and 'setBrand' methods to access and modify the 'brand' property instead of changing it directly.
+  - This helps to control how the data is changed and ensures that the internal state of the object is kept consistent.
+  */
+
+  // ------------------------
+  // 4. Polymorphism:
+  // ------------------------
+  /*
+     - Polymorphism means "many forms" and allows methods to do different things based on the object they're called on.
+  */
+  class Animal {
+    makeSound() {
+      console.log('Some generic animal sound');
+    }
+  }
+  
+  class Dog extends Animal {
+    makeSound() {
+      console.log('Woof! Woof!');
+    }
+  }
+  
+  class Cat extends Animal {
+    makeSound() {
+      console.log('Meow! Meow!');
+    }
+  }
+  
+  // Creating objects of the Animal class and its subclasses
+  let genericAnimal = new Animal();
+  let dog = new Dog();
+  let cat = new Cat();
+  
+  genericAnimal.makeSound(); // This will print: Some generic animal sound
+  dog.makeSound(); // This will print: Woof! Woof!
+  cat.makeSound(); // This will print: Meow! Meow!
+  
+  // Explanation:
+  /*
+  - We have a base class Animal with a method 'makeSound'.
+  - The Dog and Cat classes extend Animal and each overrides the 'makeSound' method to provide their own sounds.
+  - This is polymorphism in action: the same method 'makeSound' behaves differently based on the object it's called on.
+  */
+
+  // Summary:
+  /*
+  - OOP helps you organize your code into reusable and maintainable chunks.
+  - Classes define blueprints for objects.
+  - Objects are instances of classes.
+  - Inheritance allows one class to use properties and methods from another class.
+  - Encapsulation hides internal details and only exposes what is necessary.
+  - Polymorphism allows methods to do different things based on the object they are called on.
+  */
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Prototyping   L:43 (ADVANCE TOPIC- WATCH AGAIN)
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+Prototyping is a way to add methods to an object without using a class.
+
+In JavaScript, prototyping is like giving superpowers to objects. Imagine you have a blueprint (like for a car),
+and you want every car built from this blueprint to have special abilities (like being able to fly or talk).
+Prototyping helps you add these abilities to objects in a smart way without repeating code.
+*/
+
+// Example: Prototyping in Action
+
+// Let's create a simple blueprint for a Car.
+function Car(make, model) {
+    this.make = make;
+    this.model = model;
+}
+
+// Without using prototypes, every car will only know its make and model.
+// Let's add a 'start' ability to all cars using prototypes.
+
+Car.prototype.start = function() {
+    console.log(this.make + " " + this.model + " is starting.");
+};
+
+// Now, when we create a car, it will know how to start!
+let myCar2 = new Car("Toyota", "Corolla");
+myCar2.start(); // Outputs: "Toyota Corolla is starting."
+
+// Prototypes allow us to share functions and properties among all objects created from the same blueprint (like Car).
+// This means we can write less code and keep our program efficient.
+
+// Another Example: Adding a 'stop' ability
+
+Car.prototype.stop = function() {
+    console.log(this.make + " " + this.model + " is stopping.");
+};
+
+myCar2.stop(); // Outputs: "Toyota Corolla is stopping."
+
+/*
+All Data Types are Derived from Objects:
+In JavaScript, almost everything is an object. This includes arrays, strings, and even numbers.
+They all have special methods and properties that come from their prototypes.
+
+For example:
+- Arrays can use methods like push() and pop().
+- Strings can use methods like toUpperCase() and slice().
+
+These methods are part of their prototype chains, which are ultimately derived from the "super-ancestor" Object.
+*/
+
+// Let's see an example with an array.
+let fruits = ["apple", "banana", "cherry"];
+console.log(fruits.toString()); // Outputs: "apple,banana,cherry"
+
+// The toString() method is inherited from Array's prototype, which in turn inherits from Object. 
+/*
+::Object is the Super-Ancestor:
+The Object prototype is the ultimate ancestor for all objects in JavaScript. 
+If we add a new property or method to Object.prototype, all other objects, including arrays, strings, etc., will inherit it.
+*/
+// Adding a new prototype to Object(super-ancestor)🚀:
+Object.prototype.greet = function() {
+    console.log("Hello from the super-ancestor Object!");
+};
+
+// Now, every object can use the greet() method.
+myCar2.greet(); // Outputs: "Hello from the super-ancestor Object!"
+fruits.greet(); // Outputs: "Hello from the super-ancestor Object!"
+let myString = "Hello, world!";
+myString.greet(); // Outputs: "Hello from the super-ancestor Object!"
+
+/*
+However, adding methods directly to Object.prototype is generally not recommended because it affects all objects in your program,
+which can lead to unexpected behaviors. It's a powerful feature, so use it wisely!
+
+In summary, prototyping is a powerful feature in JavaScript that helps us build and manage objects more efficiently.
+And remember, all objects and data types are connected through their prototype chain to the ultimate super-ancestor: Object.
+*/
+
+//INHERITANCE OF OBJECT
+class User {
+  constructor(name, age, email){
+    this.name = name;
+    this.age = age,
+    this.email = email
+  }
+}
+
+const Teacher = {
+  trained : true,
+  subject : "Maths"
+}
+
+Object.setPrototypeOf(Teacher, new User("manjit", 34, "manjt123@gmail.com")); // Now 'Teacher' inherits properties of 'User'
+console.log(Teacher.name); // Output : manjit
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Call and this in JavaScript   L:44 
+//---------------------------------------------------------------------------------------------------------------------------------
+
+// 'this' in JavaScript:
+// 'this' is a keyword in JavaScript that refers to the object that is executing the current piece of code.
+// The value of 'this' depends on how and where a function is called.
+
+// Example 1: 'this' in a simple function
+function showThis() {
+  console.log(this);
+}
+// In a regular function, 'this' usually refers to the global object (window in browsers) or undefined in strict mode.
+showThis(); // In the browser, this will log the window object.
+
+// Example 2: 'this' in a method
+const person = {
+  name: "Alice",
+  greet: function() {
+    console.log("Hello, " + this.name);
+  }
+};
+// In a method, 'this' refers to the object that owns the method (person in this case).
+person.greet(); // Outputs: "Hello, Alice"
+
+// 'call' Method in JavaScript:
+// 'call' is a method you can use to call a function with a specific 'this' value and arguments.
+
+function introduce(greeting) {
+  console.log(greeting + ", my name is " + this.name);
+}
+
+const user = { name: "Bob" };
+
+// We can use 'call' to specify that 'this' inside introduce should refer to 'user'.
+// 'call' is used to call reference: the first parameter is passed, that first parameter is act as {default} for that call.(LEARN MORE 11:00 min)
+introduce.call(user, "Hi"); //first parameter:"user"-> user is default from which 'introduction' function will access data. Outputs: "Hi, my name is Bob"
+
+// Arrow Functions and 'this':
+// Arrow functions don't have their own 'this' value. Instead, they inherit 'this' from the surrounding code.
+
+const group = {
+  title: "Math Club",
+  members: ["Tom", "Jerry", "Spike"],
+  showMembers: function() {
+    // Using a regular function
+    this.members.forEach(function(member) {
+      // In this regular function, 'this' does not refer to 'group', so we can't access 'title' directly.
+      // This can be solved by storing 'this' in a variable.
+      console.log(member + " is part of the " + this.title);
+    });
+  }
+};
+
+group.showMembers(); // Outputs: "Tom is part of the undefined", "Jerry is part of the undefined", "Spike is part of the undefined"
+
+// Let's fix it using an arrow function which doesn't have its own 'this' but inherits from the surrounding method 'showMembers'.
+const groupFixed = {
+  title: "Math Club",
+  members: ["Tom", "Jerry", "Spike"],
+  showMembers: function() {
+    // Using an arrow function
+    this.members.forEach((member) => {
+      // Here, 'this' refers to 'group' because arrow functions inherit 'this' from the containing function.
+      console.log(member + " is part of the " + this.title);
+    });
+  }
+};
+
+groupFixed.showMembers(); // Outputs: "Tom is part of the Math Club", "Jerry is part of the Math Club", "Spike is part of the Math Club"
+
+// Summary:
+// - 'this' refers to the object that is currently calling the function.
+// - In regular functions, 'this' can refer to different objects based on how the function is called.
+// - The 'call' method allows you to specify the value of 'this' when calling a function.
+// - Arrow functions inherit 'this' from the surrounding scope, which is different from regular functions.
