@@ -1,5 +1,5 @@
 //---------------------------------------------------------------------------------------------------------------------------------
-// Window and Document
+// 🖼️ Window and Document
 //---------------------------------------------------------------------------------------------------------------------------------
 // The window object represents the browser's window.
 // The document object represents the HTML document loaded in the window.
@@ -8,7 +8,7 @@ console.log(window.innerWidth); // Accesses window's inner width
 console.log(window.document.URL); // Accesses document's URL
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// getElementById
+// 🔍 getElementById
 //---------------------------------------------------------------------------------------------------------------------------------
 // Retrieves an element by its ID attribute.
 
@@ -18,7 +18,7 @@ let elementById = document.getElementById('myElementId');
 elementById.style.color = 'blue'; // Sets the color of element with ID 'myElementId' to blue
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// getElementsByClassName
+// 🌐 getElementsByClassName
 //---------------------------------------------------------------------------------------------------------------------------------
 // Retrieves elements by their class name.
 
@@ -30,7 +30,7 @@ for (let i = 0; i < elementsByClass.length; i++) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// querySelector
+// 🎯 querySelector
 //---------------------------------------------------------------------------------------------------------------------------------
 // Retrieves the first element that matches a CSS selector.
 
@@ -40,7 +40,7 @@ let firstElement = document.querySelector('#myId .myClass');
 firstElement.innerHTML = 'Updated content'; // Sets the HTML content of the first element matching '#myId .myClass' to 'Updated content'
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// querySelectorAll
+// 🌟 querySelectorAll
 //---------------------------------------------------------------------------------------------------------------------------------
 // Retrieves all elements that match a CSS selector.
 
@@ -52,14 +52,14 @@ allElements.forEach(function(element) {
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// Style
+// 🎨 Style
 //---------------------------------------------------------------------------------------------------------------------------------
 // Accesses and modifies element styles.
 
 elementById.style.fontSize = '20px'; // Sets the font size of element with ID 'myElementId' to 20 pixels
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// Attribute
+// 🎚️ Attribute
 //---------------------------------------------------------------------------------------------------------------------------------
 // Accesses and modifies element attributes.
 
@@ -71,7 +71,7 @@ elementById.setAttribute('data-id', '123'); // Sets 'data-id' attribute to '123'
 elementById.setAttribute('data-id', '456'); // Overwrites 'data-id' attribute to '456'
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// innerText vs innerHTML
+// 📜 innerText vs innerHTML
 //---------------------------------------------------------------------------------------------------------------------------------
 // innerText: Gets or sets the visible text content of an element.
 // innerHTML: Gets or sets the HTML content of an element.
@@ -84,14 +84,14 @@ elementById.innerText = 'New text content'; // Sets visible text content of elem
 elementById.innerHTML = '<strong>New</strong> HTML content'; // Sets HTML content of element with ID 'myElementId' to '<strong>New</strong> HTML content'
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// textContent
+// 📄 textContent
 //---------------------------------------------------------------------------------------------------------------------------------
 // Gets or sets the combined text content of an element, including INVISIBLE TEXT nodes.
 
 console.log(elementById.textContent); // Retrieves combined text content of element with ID 'myElementId'
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// NodeList and HTMLCollection
+// 📦 NodeList and HTMLCollection
 //---------------------------------------------------------------------------------------------------------------------------------
 // NodeList: A collection of nodes returned by methods like getElementsByClassName.
 // HTMLCollection: Similar to NodeList but specifically for HTML elements.
@@ -107,7 +107,7 @@ for (let i = 0; i < divList.length; i++) {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// forEach
+// 🔁 forEach
 //---------------------------------------------------------------------------------------------------------------------------------
 // Iterates over each element in a NodeList or HTMLCollection.
 
@@ -116,7 +116,7 @@ allElements.forEach(function(element) {
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// Difference between querySelector and querySelectorAll
+// 🔄 Difference between querySelector and querySelectorAll
 //---------------------------------------------------------------------------------------------------------------------------------
 // querySelector: Returns the first element that matches the CSS selector.
 
@@ -132,7 +132,7 @@ allDivs.forEach(function(div) {
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// RELATIONS: L33
+// 🌐 RELATIONS: L33
 //---------------------------------------------------------------------------------------------------------------------------------
 <div className="week">
     <div className="day">Sunday</div>
@@ -143,7 +143,7 @@ allDivs.forEach(function(div) {
     <div className="day">Friday</div>
     <div className="day">Saturday</div>
 </div>
-const ancestorX = document.querySelector('week'); // consider 'week' as ancestor
+const ancestorX = document.querySelector('.week'); // consider 'week' as ancestor
 console.log(ancestorX);
 
 // Go from ancestor -> CHILD
@@ -161,8 +161,8 @@ console.log(ancestorX.firstElementChild);
 console.log(ancestorX.lastElementChild);
 
 // Go from CHILD -> ancestor
-const firstDay = document.querySelector('.day') // Sunday
-const ancestorOfDays = firstDay.ancestorElement; // week
+const firstDay = document.querySelector('.day'); // Sunday
+const ancestorOfDays = firstDay.parentElement; // week
 
 // Sibling
 const secondDay = firstDay.nextElementSibling; // Monday
@@ -171,28 +171,28 @@ const secondDay = firstDay.nextElementSibling; // Monday
 console.log(ancestorX.childNodes); // Return number of nodes in the ancestorX tree
 
 //---------------------------------------------------------------------------------------------------------------------------------
-//CREATE ELEMENT Using DOM   L:33
+// 🖌️ CREATE ELEMENT Using DOM   L:33
 //---------------------------------------------------------------------------------------------------------------------------------
-const newElemet = document.createElement('div'); 
-newElemet.className = "weeks";
-newElemet.id = "weekId";
-newElemet.setAttribute("dayOne", "Sunday");
-newElemet.style.backgroundColor = "red";
+const newElement = document.createElement('div'); 
+newElement.className = "weeks";
+newElement.id = "weekId";
+newElement.setAttribute("dayOne", "Sunday");
+newElement.style.backgroundColor = "red";
 
-// how to add text inside 'newElemet' ?
-div.innerText = "NEW ELEMENT CREATED";
+// how to add text inside 'newElement' ?
+newElement.innerText = "NEW ELEMENT CREATED";
 //or
 const addText = document.createTextNode("NEW ELEMENT CREATED");
-newElemet.appendChild(addText); // append text to div
+newElement.appendChild(addText); // append text to div
 
 // Add this to document
-document.body.appendChild(newElemet); // append div to body 
+document.body.appendChild(newElement); // append div to body 
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// ADD, EDIT & REMOVE ELEMENTS in DOM  L:34
+// 🛠️ ADD, EDIT & REMOVE ELEMENTS in DOM  L:34
 //---------------------------------------------------------------------------------------------------------------------------------
 <body>
-    <ul className = "language">
+    <ul class="language">
         <li>JavaScript</li>
     </ul>
 </body>
@@ -234,15 +234,13 @@ secLang.replaceChild(newLangNode, secLang); // replace textNode with new
 const lastLang = document.querySelector("li:last-child");
 lastLang.remove();
 
-
-
 //---------------------------------------------------------------------------------------------------------------------------------
-// PROJECTS : COMPLETED TILL 41:00
+// 🎓 PROJECTS : COMPLETED TILL 41:00
 //---------------------------------------------------------------------------------------------------------------------------------
 
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// EVENTS  L:36
+// 🎉 EVENTS  L:36
 //---------------------------------------------------------------------------------------------------------------------------------
 
 //Adding event on HTML (VERY BAD)
@@ -258,9 +256,9 @@ button.onclick = function(){
 const button = document.querySelector("button");
 button.addEventListener("click", function(){ //Here 'click' is the event upon which this function will work. There are lots of such events in js(STUDY)
     alert("Hello");
-    }, false); // We can avoid writing false(3rd parameter - EVENT PROPAGATION) as by default it's false
+    });  // we skipped writing 'FALSE'
 
-    /*----------  EVENT PROPAGATION : TIME(20:00 L:36) ------
+    /*----------  🌟 EVENT PROPAGATION : TIME(20:00 L:36) ------
 
     1. Capturing Phase (true) : From top to bottom
     2. Bubbling Phase (false) : From bottom to top 
@@ -355,14 +353,14 @@ button.addEventListener("click", function(event){
 
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// ASYYNC JS  L:37
+// 🔄 ASYNC JS  L:37
 //---------------------------------------------------------------------------------------------------------------------------------
 
 /*
 Javascript is a 'Synchronous' Language i.e where code executes line by line
 
 It executes : 1. one line at a time 
-                    -> Each operation waits for last line to complete before executing current line
+                    -> Each operation waits for the last line to complete before executing the current line
               2. JS ENGINE : Call Stack + Memory Heap formed
 
 */
@@ -379,16 +377,16 @@ It executes : 1. one line at a time
    When the operation is completed, the callback function is added to the Task Queue
    When the Call Stack is empty, the callback function is executed from the Task Queue
 
-2. There is a new RUN TIME ENVIRONMENT : (fetch) : It helps priorotise tasks, known as (micro-task queue / priority queue/fetch queue)
-    -> If there are lots of calls then the calls made using 'fetch' will be priorotise -: It has separate queue than normal 'task queue'. 
-        ->It is executed before the normal task queue. It's a VIP queue
+2. There is a new RUN TIME ENVIRONMENT : (fetch) : It helps prioritize tasks, known as (micro-task queue / priority queue/fetch queue)
+    -> If there are lots of calls then the calls made using 'fetch' will be prioritized -: It has a separate queue than the normal 'task queue'. 
+        -> It is executed before the normal task queue. It's a VIP queue
 
-3. If there are lots of Sync and Async functions then always Sync func executes first no matter what (even though Async function have timeout = 0;)
+3. If there are lots of Sync and Async functions then always Sync func executes first no matter what (even though Async function has timeout = 0;)
 */
 
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// API request and V8 engine   L:39
+// 🌐 API request and V8 engine   L:39
 //---------------------------------------------------------------------------------------------------------------------------------
 
 // XMLHttpRequest object
@@ -405,7 +403,7 @@ xlr.onreadystatechange = function(){ // To print all the state
 xlr.send(); // send request
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// Promises   L:40
+// 🌟 Promises   L:40
 //---------------------------------------------------------------------------------------------------------------------------------
 
 // Promise : 
@@ -444,7 +442,7 @@ let myPromise = new Promise((resolve, reject) => {
   }, 2000); // Wait for 2 seconds
 });
 
-// Consume: Always pass 'function'/'arraow function' to "then" & "catch" & "finally"
+// Consume: Always pass 'function'/'arrow function' to "then" & "catch" & "finally"
 myPromise.then(()=>{ 
     console.log("Task Resolved");
 }).catch(()=>{
@@ -508,7 +506,7 @@ async function consumePromiseFour() { // ALWAYS USE TRY-> CATCH whenever using a
 consumePromiseFour(); // CALL 
 
 
-// EXAMPLE on Fetching using (async-await) & (then-cach-finally):
+// EXAMPLE on Fetching using (async-await) & (then-catch-finally):
 // USING ASYNCH/AWAIT::
 async function fetchUser(){
     try{
@@ -537,7 +535,7 @@ data.then((response)=>{
 });
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// Fetch   L:41
+// 🌍 Fetch   L:41
 //---------------------------------------------------------------------------------------------------------------------------------
 /*
 Fetch is a function in JavaScript that helps you get data from other places on the internet.
@@ -546,13 +544,13 @@ It's like sending a friend to fetch (get/deliver) something for you.
 NOTE:** An accurate check for a successful fetch() would include checking that the promise -> RESOLVED. example-: "success", "error 404", all other error codes**
      ** If there is any <NETWORK ERROR> then only the promise -> REJECTED**
 
-:: It helps priorotise tasks, [14:00 min   L:41]
-    -> If there are lots of calls then the calls made using 'fetch' will be priorotise -: It has separate queue than normal 'task queue', known as (micro-task queue / priority queue/fetch queue)
-        ->It is executed before the normal task queue if both have same time to execute(like both are expected to be in 3sec). It's a VIP queue.
+:: It helps prioritize tasks, [14:00 min   L:41]
+    -> If there are lots of calls then the calls made using 'fetch' will be prioritized -: It has a separate queue than the normal 'task queue', known as (micro-task queue / priority queue/fetch queue)
+        -> It is executed before the normal task queue if both have the same time to execute(like both are expected to be in 3sec). It's a VIP queue.
         -> It helps to avoid 'callback hell'.
         -> It helps to avoid 'race condition'.
-        -> If normal task queue is expected to happen at 3 sec and fetch-queue task is expected at 4 sec. 
-            -> Then obiously 'normal-task-queue' call back will execute before 'fetch-queue'.
+        -> If the normal task queue is expected to happen at 3 sec and fetch-queue task is expected at 4 sec. 
+            -> Then obviously 'normal-task-queue' callback will execute before 'fetch-queue'.
 
 :: Special Working of Fetch [15:00 min]
 
@@ -625,7 +623,7 @@ fetch('https://api.example.com/data', {
 // - It's a powerful tool to make your websites more dynamic and responsive to real-time data.  
 
 //---------------------------------------------------------------------------------------------------------------------------------
-// OOPs   L:42
+// 🚀 OOPs   L:42
 //---------------------------------------------------------------------------------------------------------------------------------
 /*
 Object-Oriented Programming (OOP) is a way of organizing and structuring your code to make it easier to understand and work with.
@@ -672,7 +670,7 @@ class Car {
   // ------------------------
   /*
      - Inheritance allows one class to inherit properties and methods from another class.
-     - It's like a child class taking on characteristics of a ancestor class.
+     - It's like a child class taking on characteristics of an ancestor class.
   */
   class ElectricCar extends Car {
     constructor(make, model, year, batteryLife) {
@@ -748,6 +746,10 @@ class Car {
      - Polymorphism means "many forms" and allows methods to do different things based on the object they're called on.
   */
   class Animal {
+    constructor(name, age) {
+      this.name = name;
+      this.age = age;
+    }
     makeSound() {
       console.log('Some generic animal sound');
     }
@@ -780,6 +782,24 @@ class Car {
   - The Dog and Cat classes extend Animal and each overrides the 'makeSound' method to provide their own sounds.
   - This is polymorphism in action: the same method 'makeSound' behaves differently based on the object it's called on.
   */
+
+  // ------------------------
+  // Static: This key word is used to make any function unaccessible from outside the class
+  // ------------------------  
+  class Tiger extends Animal{
+    constructor(name, age){
+      super(name, age);
+    }
+  
+    static makeSound(){
+      console.log('Roar!');
+    }
+  }
+  
+  const Tiger1 = new Tiger("Rita", 22);
+  console.log(`Name of the tiger is ${Tiger1.name} and age ${Tiger1.age}`);
+  Tiger1.makeSound(); // OP : "Some generic animal sound". If it was not a static the OP: "Roar!"
+  // if class Animal didn't have makeSound() method and Tiger class had static makeSound() method. It would have given an error.
 
   // Summary:
   /*
@@ -907,7 +927,7 @@ function showThis() {
 showThis(); // In the browser, this will log the window object.
 
 // Example 2: 'this' in a method
-const person = {
+const personYperson = {
   name: "Alice",
   greet: function() {
     console.log("Hello, " + this.name);
@@ -967,3 +987,397 @@ groupFixed.showMembers(); // Outputs: "Tom is part of the Math Club", "Jerry is 
 // - In regular functions, 'this' can refer to different objects based on how the function is called.
 // - The 'call' method allows you to specify the value of 'this' when calling a function.
 // - Arrow functions inherit 'this' from the surrounding scope, which is different from regular functions.
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Bind L:46
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+'bind' Method in JavaScript:
+'bind' is a method that allows you to create a new function with a specific 'this' value and optionally preset arguments.
+This new function can be called later with the 'this' value you specified.
+*/
+
+// Example 1: Basic use of 'bind'
+function greet() {
+  console.log("Hello, " + this.name);
+}
+
+const user1 = { name: "Alice" };
+const user2 = { name: "Bob" };
+
+// Use 'bind' to create new functions with 'this' set to user1 and user2 respectively
+const greetAlice = greet.bind(user1);
+const greetBob = greet.bind(user2);
+
+greetAlice(); // Outputs: "Hello, Alice"
+greetBob();   // Outputs: "Hello, Bob"
+
+// In these examples, 'greetAlice' and 'greetBob' are new functions created from 'greet', but with 'this' permanently set to 'user1' and 'user2'.
+
+// Example 2: Presetting arguments with 'bind'
+function introduce(greeting, punctuation) {
+  console.log(greeting + ", my name is " + this.name + punctuation);
+}
+
+const personX = { name: "Charlie" };
+
+// Use 'bind' to create a new function with 'this' set to 'personX' and preset arguments
+const introduceWithHello = introduce.bind(personX, "Hello", "!");
+
+introduceWithHello(); // Outputs: "Hello, my name is Charlie!"
+
+// Example 3: Using 'bind' for method borrowing
+const person1 = {
+  name: "David",
+  introduce() {
+    console.log("Hi, my name is " + this.name);
+  }
+};
+
+const person2 = { name: "Emma" };
+
+// Borrow the 'introduce' method from 'person1' and bind it to 'person2'
+const introduceEmma = person1.introduce.bind(person2);
+
+introduceEmma(); // Outputs: "Hi, my name is Emma"
+
+// Good Example:  [L: 46 9:00 min]
+class reactUser{
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    document.querySelector("button").addEventListener("click", this.handleClick.bind(this));
+    /*
+    here we must use 'bind' to pass the [current context reference] i.e (name, age). Otherwise
+    the context will be lost and the function handleClick will print undefined name and age
+    */
+  }
+  handleClick(){
+    console.log(this.name + " is " + this.age + " years old");
+  }
+}
+
+/*
+Summary:
+- 'bind' creates a new function with 'this' set to a specific value.
+- The new function can also have preset arguments that are passed to the original function.
+- 'bind' is useful for method borrowing, ensuring consistent 'this' context, and partial function application.
+*/
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Descriptor L:47
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+Property Descriptors in JavaScript:
+Property descriptors provide detailed information about the properties of objects.
+They define the characteristics of a property and allow you to control its behavior.
+
+Each property in an object has a property descriptor that includes the following attributes:
+- value: The property's value (default is undefined).
+- writable: If true, the property's value can be changed (default is true).
+- enumerable: If true, the property shows up in for...in loops and Object.keys (default is true).
+- configurable: If true, the property descriptor can be changed, and the property can be deleted (default is true).
+*/
+
+// Example 1: Viewing a property descriptor
+const personY = {
+  name: "Alice",
+  age: 30
+};
+
+// Use <<Object.getOwnPropertyDescriptor>> to view the descriptor of a property
+const descriptor = Object.getOwnPropertyDescriptor(personY, 'name');
+console.log(descriptor);
+/* Outputs: { 
+  value: 'Alice', 
+  writable: true, 
+  enumerable: true, 
+  configurable: true 
+}
+*/
+// Example 2: Defining a property with a custom descriptor
+const book = {};
+
+// Use Object.defineProperty to create a new property with specific attributes
+// This is how 'PI' property is defined inside 'Math' in javascript
+Object.defineProperty(book, 'title', {
+  value: 'JavaScript Guide',
+  writable: false,        // The title cannot be changed
+  enumerable: true,       // The title will appear in for...in loops
+  configurable: false     // The title cannot be deleted or reconfigured
+});
+
+console.log(book.title); // Outputs: JavaScript Guide
+book.title = "New Title"; // This will not change the title because writable is false
+console.log(book.title); // Still outputs: JavaScript Guide
+
+// Example 3: Controlling enumeration and configuration
+Object.defineProperty(book, 'author', {
+  value: 'John Doe',
+  writable: true,
+  enumerable: false,      // The author will <<not appear/ HIDDEN>> in for...in loops or Object.keys
+                          // (Whether it will be DISPLAY or not to any loop on this object)
+  configurable: true      // The author property can be changed or deleted
+});
+
+console.log(book.author); // Outputs: John Doe
+
+// The 'author' property is not enumerable
+for (let key in book) {
+  console.log(key); // Outputs: title (author does not appear)
+}
+
+// Example 4: Defining a getter and setter using descriptors
+const userY = {
+  firstName: "Bob",
+  lastName: "Smith"
+};
+
+Object.defineProperty(userY, 'fullName', {
+  get() {
+    return this.firstName + " " + this.lastName;
+  },
+  set(value) {
+    [this.firstName, this.lastName] = value.split(" ");
+  },
+  enumerable: true,
+  configurable: true
+});
+
+console.log(userY.fullName); // Outputs: Bob Smith
+userY.fullName = "Alice Johnson"; // Sets firstName to Alice and lastName to Johnson
+console.log(userY.fullName); // Outputs: Alice Johnson
+
+/*
+Summary:
+- Property descriptors define how a property behaves in an object.
+- You can view a property's descriptor using Object.getOwnPropertyDescriptor.
+- You can define or modify a property with specific attributes using Object.defineProperty.
+- Descriptors can control if a property is writable, enumerable, and configurable.
+- You can also define getter and setter functions for properties using descriptors.
+*/
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Getter-Setter L:48
+//---------------------------------------------------------------------------------------------------------------------------------
+/*
+Getters and Setters in JavaScript:
+Getters and setters are special methods in JavaScript that allow you to define how to access and update properties of an object.
+They are used to encapsulate the internal state of an object and control how it is accessed or modified.
+*/
+
+// ::Example 1: Basic Getter and Setter in <<Object>>
+const person = {
+  firstName: "John",
+  lastName: "Doe",
+
+  // Getter: A method that returns the full name
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  },
+
+  // Setter: A method that sets firstName and lastName from a full name
+  set fullName(name) {
+    const parts = name.split(" ");
+    this.firstName = parts[0];
+    this.lastName = parts[1];
+  }
+};
+
+console.log(person.fullName); // Outputs: John Doe (uses the getter to get the full name)
+
+person.fullName = "Jane Smith"; // Uses the setter to set the firstName and lastName
+console.log(person.fullName); // Outputs: Jane Smith
+
+// ::Example 2: Using Getters and Setters for Validation
+const account = {
+  _balance: 1000, // Private property (conventionally prefixed with an underscore)
+
+  // Getter: A method that returns the balance
+  get balance() {
+    return this._balance;
+  },
+
+  // Setter: A method that allows setting the balance with validation
+  set balance(amount) {
+    if (amount < 0) {
+      console.log("Balance cannot be negative.");
+    } else {
+      this._balance = amount;
+    }
+  }
+};
+
+console.log(account.balance); // Outputs: 1000 (uses the getter to get the balance)
+
+account.balance = 500; // Uses the setter to update the balance
+console.log(account.balance); // Outputs: 500
+
+account.balance = -100; // Tries to set a negative balance, but validation prevents it
+// Outputs: "Balance cannot be negative."
+console.log(account.balance); // Outputs: 500 (balance remains unchanged)
+
+// ::Example 3: Defining Getters and Setters using <<Object.defineProperty>>
+const book = {
+  _title: "JavaScript Basics"
+};
+
+// Define a getter and setter for the 'title' property using Object.defineProperty
+Object.defineProperty(book, 'title', {
+  get() {
+    return this._title.toUpperCase(); // Always returns the title in uppercase
+  },
+  set(value) {
+    if (value.length < 3) {
+      console.log("Title is too short.");
+    } else {
+      this._title = value;
+    }
+  },
+  enumerable: true,   // Property will appear in loops
+  configurable: true  // Property can be changed or deleted
+});
+
+console.log(book.title); // Outputs: JAVASCRIPT BASICS (getter converts to uppercase)
+
+book.title = "JS"; // Tries to set a short title, validation prevents it
+// Outputs: "Title is too short."
+console.log(book.title); // Outputs: JAVASCRIPT BASICS (title remains unchanged)
+
+book.title = "Advanced JavaScript"; // Sets a valid title
+console.log(book.title); // Outputs: ADVANCED JAVASCRIPT
+
+// ::Example 4: Getters and Setters with a Class Constructor
+class Rectangle {
+  constructor(width, height) {
+    this._width = width;   // Private property (use _ to indicate private by convention)
+    this._height = height; // Private property
+  }
+
+  // Getter for area
+  get area() {
+    if(this._width < 0 || this._height < 0) return "Invalid Input"
+    return this._width * this._height;
+  }
+
+  // Setter for width with validation
+  set width(value) {
+    if (value <= 0) {
+      console.log("Width must be positive.");
+    } else {
+      this._width = value;
+    }
+  }
+
+  // Getter for width
+  get width() {
+    return this._width;
+  }
+
+  // Setter for height with validation
+  set height(value) {
+    if (value <= 0) {
+      console.log("Height must be positive.");
+    } else {
+      this._height = value;
+    }
+  }
+
+  // Getter for height
+  get height() {
+    return this._height;
+  }
+}
+
+const rect = new Rectangle(10, 20);
+console.log(`Width: ${rect.width}, Height: ${rect.height}, Area: ${rect.area}`);
+// Outputs: Width: 10, Height: 20, Area: 200
+
+rect.width = 15; // Updates width using the setter
+console.log(`New Width: ${rect.width}, Area: ${rect.area}`);
+// Outputs: New Width: 15, Area: 300
+
+rect.height = -5; // Tries to set a negative height, validation prevents it
+// Outputs: "Height must be positive."
+console.log(`New Height: ${rect.height}, Area: ${rect.area}`);
+// Outputs: New Height: 20, Area: 300 (height remains unchanged)
+
+/*
+Summary:
+- Getters and setters provide a way to control access and updates to an object's properties.
+- Getters compute or transform a value when accessed.
+- Setters validate or preprocess a value before it is set.
+- Getters and setters can be defined directly in an object literal, using Object.defineProperty, or in class constructors.
+- They help encapsulate the internal state and logic, making code cleaner and more maintainable.
+*/
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+// Lexical Scoping & Closure L:49
+//---------------------------------------------------------------------------------------------------------------------------------
+
+// 📘 Lexical Scoping in JavaScript:
+// Lexical scoping means where you write your code (the position) determines where and how variables are accessible.
+
+// 🗂️ Imagine a big office with many rooms. If you keep a file in Room A, you can access it from Room B if Room B is inside Room A. 
+// But you can't access a file in Room A from Room B if Room B is outside Room A.
+
+function classroom() {
+  const teacher = "Mr. Smith"; // Teacher is in the classroom
+
+  function lesson() {
+    // The lesson can access the teacher
+    console.log(teacher); // Outputs: "Mr. Smith"
+  }
+
+  lesson(); // Call the lesson
+}
+
+classroom(); // Call the classroom function
+
+// 🌟 Key Points of Lexical Scoping:
+// - Inner functions (inside functions) can access variables defined in their outer functions.
+// - Think of it like nested rooms: inner rooms can access things from outer rooms.
+
+
+// 🔐 Closure in JavaScript:
+// A closure is when a function "remembers" the variables around it even after the outer function is done.
+
+// 🎒 Imagine you pack a lunchbox with a sandwich and give it to a friend.
+// Your friend can eat the sandwich later, even if you're not around, because the sandwich is in the lunchbox.
+
+function packLunch() {
+  let sandwich = "Ham Sandwich"; // This is the sandwich
+
+  // The lunchbox (closure) keeps the sandwich inside
+  return function() {
+    return sandwich; // Your friend can access the sandwich
+  };
+}
+
+const lunchbox = packLunch();
+console.log(lunchbox()); // Outputs: "Ham Sandwich" (even though packLunch is done)
+
+// 🔍 What happens here?
+// - The `packLunch` function packs a sandwich and returns a lunchbox (inner function).
+// - The returned lunchbox (closure) keeps the sandwich, even after `packLunch` is done.
+// - Whenever you open the lunchbox (call the function), you get the sandwich inside.
+
+// 📦 Practical Use Cases of Closures:
+// 1. **Saving Data for Later**: Like keeping a lunchbox to eat later.
+// 2. **Keeping Secrets**: Hiding variables inside functions so only specific parts can use them.
+
+function secretKeeper(secret) {
+  return function() {
+    return `The secret is: ${secret}`;
+  };
+}
+
+const mySecret = secretKeeper("I love ice cream!"); // Keep a secret
+console.log(mySecret()); // Outputs: "The secret is: I love ice cream!"
+
+// 🧩 Summary:
+// - **Lexical Scoping** means inner functions can access variables from outer functions, like rooms inside other rooms.
+// - **Closures** are functions that keep and remember variables from their outer function, like a lunchbox keeping a sandwich.
